@@ -320,6 +320,7 @@ endif
 
 CC       := $(CC)
 CPPC     := $(CXX)
+OBJCC    := $(CC)
 FF       := $(FC)
 RANLIB   := $(RANLIB)
 AR       := $(AR)
@@ -1510,6 +1511,7 @@ endif
 # OBJS: list of .o with relative path
 OBJ = $(notdir $(SRC))
 OBJ := $(OBJ:.c=.o)
+OBJ := $(OBJ:.m=.o)
 OBJ := $(OBJ:.cpp=.o)
 OBJ := $(OBJ:.cxx=.o)
 OBJ := $(OBJ:.cc=.o)
@@ -1698,6 +1700,10 @@ endif
 $(OBJDIR)/%.o:  $(SRCDIR)/%.c
 	@echo ''; echo Tecmake: compiling $(<F) ...
 	$(ECHO)$(CC) -c $(CFLAGS) -o $@ $<
+
+$(OBJDIR)/%.o:  $(SRCDIR)/%.m
+	@echo ''; echo Tecmake: compiling $(<F) ...
+	$(ECHO)$(OBJCC) -c $(CFLAGS) -o $@ $<
 
 $(OBJDIR)/%.o:  $(SRCDIR)/%.cpp
 	@echo ''; echo Tecmake: compiling $(<F) ...
