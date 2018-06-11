@@ -4,7 +4,7 @@ else
   TECMAKE_CMD = +$(MAKE) --no-print-directory -f ../tecmake.mak
 endif
 
-.PHONY: do_all iup iupgtk iupmot iuphaiku iupstub
+.PHONY: do_all iup iupgtk iupcocoa iupmot iuphaiku iupstub
 do_all: iup
 
 iup:
@@ -12,6 +12,9 @@ iup:
 
 iupgtk:
 	@$(TECMAKE_CMD) USE_GTK=Yes
+
+iupcocoa:
+	@$(TECMAKE_CMD) USE_COCOA=Yes
 
 iupmot:
 	@$(TECMAKE_CMD) USE_MOTIF=Yes

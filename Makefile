@@ -5,7 +5,7 @@ endif
 .PHONY: do_all iup iupgtk iupmot iupcd iupcontrols iupgl iupglcontrols iup_plot iup_mglplot iup_scintilla iupim iupimglib ledc iupview iuplua5 iupluaconsole iupluascripter iupole iupweb iuptuio
 do_all: iup iupcd iupcontrols iupgl iupglcontrols iup_plot iup_mglplot iup_scintilla iupim iupimglib $(WINLIBS) iupweb iuptuio ledc iupview iuplua5 iupluaconsole iupluascripter
 
-iup iupgtk iupmot:
+iup iupgtk iupmot iupcocoa:
 	@$(MAKE) --no-print-directory -C ./src/ $@
 iupcd:
 	@$(MAKE) --no-print-directory -C ./srccd/
