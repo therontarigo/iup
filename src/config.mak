@@ -2,6 +2,10 @@ PROJNAME = iup
 LIBNAME := iup
 OPT = YES
 
+ifeq "$(TEC_SYSNAME)" "MacOS"
+  USE_COCOA = Yes
+endif
+
 ifeq "$(TEC_SYSNAME)" "Haiku"
   USE_HAIKU = Yes
 else
@@ -9,21 +13,11 @@ ifdef GTK_DEFAULT
   ifdef USE_MOTIF
     # Build Motif version in Linux and BSD
     LIBNAME := $(LIBNAME)mot
-  else
-    ifeq ($(findstring Win, $(TEC_SYSNAME)), )
-      # Force definition if not in Windows
-      USE_GTK = Yes
-    endif
   endif
 else  
   ifdef USE_GTK
     # Build GTK version in IRIX,SunOS,AIX,Win32
     LIBNAME := $(LIBNAME)gtk
-  else
-    ifeq ($(findstring Win, $(TEC_SYSNAME)), )
-      # Force definition if not in Windows
-      USE_MOTIF = Yes
-    endif
   endif
 endif
 endif
@@ -46,7 +40,7 @@ SRC = iup_array.c iup_callback.c iup_dlglist.c iup_attrib.c iup_focus.c iup_font
       iup_box.c iup_hbox.c iup_vbox.c iup_cbox.c iup_class.c iup_classbase.c iup_maskmatch.c \
       iup_mask.c iup_maskparse.c iup_tabs.c iup_spin.c iup_list.c iup_getparam.c iup_link.c \
       iup_sbox.c iup_scrollbox.c iup_normalizer.c iup_tree.c iup_split.c iup_layoutdlg.c \
-      iup_recplay.c iup_progressdlg.c iup_expander.c iup_open.c iup_table.c iup_canvas.c \
+      iup_recplay.c iup_progressdlg.c iup_expander.c iup_open.c iup_loop.c iup_table.c iup_canvas.c \
       iup_gridbox.c iup_detachbox.c iup_backgroundbox.c iup_linefile.c iup_config.c \
       iup_flatbutton.c iup_animatedlabel.c iup_draw.c iup_flatframe.c iup_flattabs.c \
       iup_flatscrollbar.c iup_flatscrollbox.c iup_gauge.c iup_dial.c iup_colorbar.c \
@@ -69,6 +63,14 @@ ifdef USE_HAIKU
   INCLUDES += haiku
 #  DEFINES += 
 else
+
+ifdef USE_COCOA
+  SRC += cocoa/IUPCocoaVerticalAlignmentTextFieldCell.m cocoa/IUPTextSpinnerFilesOwner.m cocoa/IupAppDelegate.m cocoa/iupcocoa_button.m cocoa/iupcocoa_calendar.m cocoa/iupcocoa_canvas.m cocoa/iupcocoa_clipboard.m cocoa/iupcocoa_colordlg.m cocoa/iupcocoa_common.m cocoa/iupcocoa_dialog.m cocoa/iupcocoa_dragdrop.m cocoa/iupcocoa_draw.m cocoa/iupcocoa_filedlg.m cocoa/iupcocoa_focus.m cocoa/iupcocoa_font.m cocoa/iupcocoa_fontdlg.m cocoa/iupcocoa_frame.m cocoa/iupcocoa_image.m cocoa/iupcocoa_info.m cocoa/iupcocoa_label.m cocoa/iupcocoa_list.m cocoa/iupcocoa_loop.m cocoa/iupcocoa_menu.m cocoa/iupcocoa_messagedlg.m cocoa/iupcocoa_open.m cocoa/iupcocoa_progressbar.m cocoa/iupcocoa_tabs.m cocoa/iupcocoa_text.m cocoa/iupcocoa_timer.m cocoa/iupcocoa_tips.m cocoa/iupcocoa_toggle.m cocoa/iupcocoa_tree.m cocoa/iupcocoa_val.m cocoa/iupmac_globalattrib.m cocoa/iupmac_help.m
+  SRC += iup_datepick.c
+# SRC += cocoa/iupmac_info.m
+# SRC += cocoa/iupmac_key.m
+endif
+
 ifdef USE_GTK
   CHECK_GTK = Yes
   DEFINES += GTK_DISABLE_DEPRECATED 
@@ -147,7 +149,9 @@ ifdef USE_MOTIF
   USE_X11 = Yes
 
   INCLUDES += mot
-else
+endif
+
+ifneq ($(findstring Win, $(TEC_SYSNAME)), )
   SRC += win/iupwin_common.c win/iupwin_brush.c win/iupwin_focus.c win/iupwin_font.c \
          win/iupwin_globalattrib.c win/iupwin_handle.c win/iupwin_key.c win/iupwin_str.c \
          win/iupwin_loop.c win/iupwin_open.c win/iupwin_tips.c win/iupwin_info.c \

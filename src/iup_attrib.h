@@ -11,6 +11,8 @@
 extern "C" {
 #endif
 
+#include "iup_export.h"
+
 /** \defgroup attrib Attribute Environment 
  * \par
  * When attributes are not stored at the control  
@@ -32,11 +34,11 @@ extern "C" {
 
 /** Returns true if the attribute name is a known pointer. \n
  * \ingroup attrib */
-int iupAttribIsNotString(Ihandle* ih, const char *name);
+IUP_EXPORTI int iupAttribIsNotString(Ihandle* ih, const char *name);
 
 /** Returns true if the attribute name is a known Ihandle*. \n
 * \ingroup attrib */
-int iupAttribIsIhandle(Ihandle* ih, const char *name);
+IUP_EXPORTI int iupAttribIsIhandle(Ihandle* ih, const char *name);
 
 
 
@@ -44,7 +46,7 @@ int iupAttribIsIhandle(Ihandle* ih, const char *name);
  * Only generic pointers and constant strings can be set as value. \n
  * It ignores children.
  * \ingroup attrib */
-void iupAttribSet(Ihandle* ih, const char* name, const char* value);
+IUP_EXPORTI void iupAttribSet(Ihandle* ih, const char* name, const char* value);
 
 /** Sets the attribute only in the hash table as a string. \n 
  * The string is internally duplicated. \n
@@ -123,7 +125,7 @@ void iupAttribSetDoubleId2(Ihandle *ih, const char* name, int lin, int col, doub
 /** Returns the attribute from the hash table only.  \n
  * NO inheritance, NO control implementation, NO defalt value here. \n
  * \ingroup attrib */
-char* iupAttribGet(Ihandle* ih, const char* name);
+IUP_EXPORTI char* iupAttribGet(Ihandle* ih, const char* name);
 
 /** Returns the attribute from the hash table as a string, 
  * but if not defined then checks in its parent tree if allowed by the control implementation, 
@@ -213,11 +215,11 @@ char* iupAttribGetLocal(Ihandle* ih, const char* name);
 
 /** Set an internal name to a handle.
  * \ingroup attrib */
-void iupAttribSetHandleName(Ihandle *ih);
+IUP_EXPORTI void iupAttribSetHandleName(Ihandle *ih);
 
 /** Returns the internal name if set.
  * \ingroup attrib */
-char* iupAttribGetHandleName(Ihandle *ih);
+IUP_EXPORTI char* iupAttribGetHandleName(Ihandle *ih);
 
 
 

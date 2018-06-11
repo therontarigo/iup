@@ -9,6 +9,7 @@
 
 #include <stdarg.h>
 #include "iup_class.h"
+#include "iup_export.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -69,6 +70,11 @@ typedef struct _GtkWidget InativeHandle;
 typedef struct _WidgetRec InativeHandle;
 #elif defined(WINVER)
 typedef struct HWND__ InativeHandle;
+#elif defined(__APPLE__)
+//#import <CoreFoundation/CoreFoundation.h>
+	// Problem: The usage of InativeHandle always appends a '*'.
+	// Both id and CFTypeRef are already pointers so I don't want a double pointer.
+	typedef void InativeHandle;
 #else
 typedef struct _InativeHandle InativeHandle;
 #endif
@@ -121,12 +127,12 @@ Ihandle* iupObjectCreate(Iclass* ic, void** params);
 /** Utility that returns an array of parameters. Must call free for the returned value after usage.
  * Used by the creation functions of objects that receives a NULL terminated array of parameters.
  * \ingroup object */
-void** iupObjectGetParamList(void* first, va_list arglist);
+IUP_EXPORTI void** iupObjectGetParamList(void* first, va_list arglist);
  
 /** Checks if the handle is still valid based on the signature.
  * But if the handle was destroyed still can access invalid memory.
  * \ingroup object */
-int iupObjectCheck(Ihandle* ih);
+IUP_EXPORTI int iupObjectCheck(Ihandle* ih);
 
 
 /* Other functions declared in <iup.h> and implemented here. 

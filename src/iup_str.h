@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+#include "iup_export.h"
+
 
 /** \defgroup str String Utilities
  * \par
@@ -21,7 +23,7 @@ extern "C" {
 /** Returns a non zero value if the two strings are equal.
  * str1 or str2 can be NULL.
  * \ingroup str */
-int iupStrEqual(const char* str1, const char* str2);
+IUP_EXPORTI int iupStrEqual(const char* str1, const char* str2);
 
 /** Returns a non zero value if the two strings are equal but ignores case.
  * str1 or str2 can be NULL.
@@ -53,7 +55,7 @@ int iupStrEqualNoCasePartial(const char* str1, const char* str2);
 /** Returns 1 if the string is "YES" or "ON". \n
  * Returns 0 otherwise (including NULL or empty).
  * \ingroup str */
-int iupStrBoolean(const char* str);
+IUP_EXPORTI int iupStrBoolean(const char* str);
 
 /** Returns 1 if the string is "NO" or "OFF". \n
  * Returns 0 otherwise (including NULL or empty). \n
@@ -82,24 +84,24 @@ const char* iupStrNextValue(const char* str, int str_len, int *len, char sep);
 
 /** Returns the number of repetitions of the character occurs in the string.
  * \ingroup str */
-int iupStrCountChar(const char *str, char c);
+IUP_EXPORTI int iupStrCountChar(const char *str, char c);
 
 
 
 /** Returns a copy of the given string.
  * If str is NULL it will return NULL.
  * \ingroup str */
-char* iupStrDup(const char* str); 
+IUP_EXPORTI char* iupStrDup(const char* str); 
 
 /** Returns a new string containing a copy of the string up to the character.
  * The string is then incremented to after the position of the character.
  * \ingroup str */
-char *iupStrDupUntil(const char **str, char c);
+IUP_EXPORTI char *iupStrDupUntil(const char **str, char c);
 
 /** Copy the string to the buffer, but limited to the max_size of the buffer.
  * buffer is always properly ended.
  * \ingroup str */
-void iupStrCopyN(char* dst_str, int dst_max_size, const char* src_str);
+IUP_EXPORTI void iupStrCopyN(char* dst_str, int dst_max_size, const char* src_str);
 
 
 
@@ -163,11 +165,11 @@ char* iupStrReturnStrf(const char* format, ...);
 
 /** Returns a string value in a string using \ref iupStrGetMemory.
  * \ingroup str */
-char* iupStrReturnStr(const char* str);
+IUP_EXPORTI char* iupStrReturnStr(const char* str);
 
 /** Returns a boolean value (as YES or NO) in a string.
  * \ingroup str */
-char* iupStrReturnBoolean(int i);
+IUP_EXPORTI char* iupStrReturnBoolean(int i);
 
 /** Returns a checked value (as ON, OFF or NOTDEF (-1)) in a string.
  * \ingroup str */
@@ -175,7 +177,7 @@ char* iupStrReturnChecked(int i);
 
 /** Returns an int value in a string using \ref iupStrGetMemory.
  * \ingroup str */
-char* iupStrReturnInt(int i);
+IUP_EXPORTI char* iupStrReturnInt(int i);
 
 /** Returns an unsigned int value in a string using \ref iupStrGetMemory.
 * \ingroup str */
@@ -234,7 +236,7 @@ int iupStrToRGBA(const char *str, unsigned char *r, unsigned char *g, unsigned c
 /** Converts the string to an int. The string must contains only the integer value.
  * Returns a a non zero value if successful.
  * \ingroup str */
-int iupStrToInt(const char *str, int *i);
+IUP_EXPORTI int iupStrToInt(const char *str, int *i);
 
 /** Converts the string to an unsigned int. The string must contains only the integer value.
 * Returns a a non zero value if successful.
@@ -309,7 +311,7 @@ char* iupStrFileGetPath(const char *file_name);
 
 /** Concat path and title addind '/' between if path does not have it.
  * \ingroup str */
-char* iupStrFileMakeFileName(const char* path, const char* title);
+IUP_EXPORTI char* iupStrFileMakeFileName(const char* path, const char* title);
 
 /** Split the filename in path and title using pre-allocated strings.
  * \ingroup str */

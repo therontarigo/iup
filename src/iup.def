@@ -285,6 +285,7 @@ iupdrvGetScreenSize
 iupdrvAddScreenOffset
 iupdrvGetScreenDepth
 iupdrvGetScreenDpi
+iupdrvGetPreferencePath
 iupdrvGetKeyState
 iupdrvGetFullSize
 iupdrvGetDisplay

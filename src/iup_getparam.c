@@ -21,6 +21,7 @@
 #include "iup_register.h"
 #include "iup_stdcontrols.h"
 #include "iup_varg.h"
+#include "iup_export.h"
 
 
 #define IUP_RAD2DEG  57.295779513   /* radians to degrees (deg = IUP_RAD2DEG * rad) */
@@ -1425,7 +1426,7 @@ static char* iParamStrGetType(const char* format)
 }
 
 /* Used in IupLua */
-char iupGetParamType(const char* format, int *line_size)
+IUP_EXPORTI char iupGetParamType(const char* format, int *line_size)
 {
   char* type = iParamStrGetType(format);
   char* line_end = strchr(format, '\n');
@@ -1624,7 +1625,7 @@ static int iParamCreateMethod(Ihandle* param, void** params)
 }
 
 /* Used in IupLua also */
-int iupGetParamCount(const char *format, int *param_extra)
+IUP_EXPORTI int iupGetParamCount(const char *format, int *param_extra)
 {
   int param_count = 0, extra = 0;
   const char* s = format;
